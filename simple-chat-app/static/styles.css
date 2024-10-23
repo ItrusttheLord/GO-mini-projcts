@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+#chat {
+  width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-top: 30px;
+}
+
+#messages {
+  height: 300px;
+  border: 1px solid #ddd;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#messageInput {
+  width: 80%;
+}
+
+#sendMessage {
+  width: 18%;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Chat</title>
+    <link rel="stylesheet" href="static/styles.css" />
+  </head>
+  <body>
+    <div id="chat">
+      <div id="messages"></div>
+      <input id="messageInput" type="text" placeholder="Type a message..." />
+      <button id="sendMessage">Send</button>
+    </div>
+
+    <script>
+      const ws = new WebSocket('ws://localhost:8080/ws');
+
+      ws.onmessage = function (event) {
+        const messagesDiv = document.getElementById('messages');
+        messagesDiv.innerHTML += `<div>${event.data}</div>`;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto scroll
+      };
+
+      document.getElementById('sendMessage').onclick = function () {
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value;
+        if (message.trim() !== '') {
+          ws.send(message);
+          const messagesDiv = document.getElementById('messages');
+          messagesDiv.innerHTML += `<div>You: ${message}</div>`;
+          messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto scroll
+          messageInput.value = ''; // Clear the input after sending
+        }
+      };
+    </script>
+  </body>
+</html>
